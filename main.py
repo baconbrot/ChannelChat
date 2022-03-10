@@ -10,7 +10,6 @@ token = config.get('main', 'token')
 log_channel = int(config.get('log', 'channel'))
 
 
-client = discord.Client()
 bot = commands.Bot(command_prefix='!')
 
 last_creation = None
@@ -46,7 +45,7 @@ async def on_voice_state_update(member: Member, before: VoiceState, after: Voice
             print(e)
 
 async def log(message: str):
-    channel = client.get_channel(log_channel)
+    channel = bot.get_channel(log_channel)
     await channel.send(message)
 
 @bot.command()
