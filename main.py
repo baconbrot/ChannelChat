@@ -52,7 +52,9 @@ async def log(message: str):
 
 @bot.command()
 @has_permissions(manage_channels=True, manage_roles=True)
-async def create_channel(ctx, arg):
+async def create_channel(ctx, arg=None):
+    if not arg:
+        return
     guild = ctx.guild
     role = None
     category = None
@@ -86,7 +88,9 @@ async def create_channel(ctx, arg):
 
 @bot.command()
 @has_permissions(manage_channels=True, manage_roles=True)
-async def delete_channel(ctx, arg):
+async def delete_channel(ctx, arg=None):
+    if not arg:
+        return
     guild = ctx.guild
     category = next(category for category in guild.categories if category.name == arg)
     for text_channel in category.text_channels:
