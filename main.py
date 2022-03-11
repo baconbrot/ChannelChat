@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import discord
 from discord import VoiceState, Member, Forbidden, HTTPException, Colour
 from configparser import ConfigParser
