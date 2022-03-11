@@ -3,6 +3,7 @@ import discord
 from discord import VoiceState, Member, Forbidden, HTTPException, Colour
 from configparser import ConfigParser
 from discord.ext import commands
+from discord.ext.commands import has_permissions
 
 config = ConfigParser()
 config.read('config.ini')
@@ -12,7 +13,8 @@ log_channel = int(config.get('log', 'channel'))
 
 bot = commands.Bot(command_prefix='!')
 
-last_creation = None
+last_command_create = False
+last_args = None
 
 def get_channel_role(voiceState: VoiceState):
     try:
@@ -49,6 +51,7 @@ async def log(message: str):
     await channel.send(message)
 
 @bot.command()
+@has_permissions(manage_channels=True, manage_roles=True)
 async def create_channel(ctx, arg):
     guild = ctx.guild
     role = None
@@ -76,10 +79,13 @@ async def create_channel(ctx, arg):
             await role.delete()
         if category:
             await category.delete()
-    global last_creation
-    last_creation = arg
+    global last_command_create
+    last_command_create = True
+    global last_args
+    last_args = arg
 
 @bot.command()
+@has_permissions(manage_channels=True, manage_roles=True)
 async def delete_channel(ctx, arg):
     guild = ctx.guild
     category = next(category for category in guild.categories if category.name == arg)
@@ -90,11 +96,19 @@ async def delete_channel(ctx, arg):
     await category.delete()
     role = next(role for role in guild.roles if role.name == 'Channel: ' + arg)
     await role.delete()
+    global last_command_create
+    last_command_create = False
+    global last_args
+    last_args = arg
+
 
 @bot.command()
+@has_permissions(manage_channels=True, manage_roles=True)
 async def undo(ctx):
-    if last_creation:
-        await delete_channel(ctx, last_creation)
+    if last_command_create:
+        await delete_channel(ctx, last_args)
+    elif last_command_create is not None:
+        await create_channel(ctx, last_args)
 
 
 bot.run(token)
