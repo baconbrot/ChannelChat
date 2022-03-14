@@ -6,7 +6,7 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions
 
 config = ConfigParser()
-config.read('config.ini')
+config.read('config.toml')
 token = config.get('main', 'token')
 log_channel = int(config.get('log', 'channel'))
 
@@ -17,6 +17,11 @@ last_command_create = False
 last_args = None
 
 def get_channel_role(voiceState: VoiceState):
+    """
+    Adds the role prefix to the Channel-Name
+    :param voiceState:
+    :return:
+    """
     try:
         return 'Channel: ' + voiceState.channel.category.name
     except:
@@ -24,6 +29,9 @@ def get_channel_role(voiceState: VoiceState):
 
 @bot.event
 async def on_voice_state_update(member: Member, before: VoiceState, after: VoiceState):
+    """
+    Assigns and removes "Channel: Channel-Name" roles to and from users.
+    """
     if member is None or before is None or after is None:
         await log(f'on_voice_state_update error: {member=}, {before=}, {after=}')
         return
