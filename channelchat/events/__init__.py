@@ -1,0 +1,1 @@
+from channelchat.events.handlers import channelrole

@@ -1,0 +1,1 @@
+from channelchat.commands import *
