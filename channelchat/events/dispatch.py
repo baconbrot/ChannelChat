@@ -1,4 +1,9 @@
+from importlib import import_module
+from pkgutil import walk_packages, iter_modules
+
+import channelchat
 from channelchat.events.eventType import EventType
+
 
 _listeners = {}
 
@@ -22,3 +27,5 @@ def register(event_type: EventType):
         _listeners[event_type.value] = tasks
         return func
     return decorator
+
+

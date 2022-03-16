@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 from collections import deque
 
-import discord
-from discord import VoiceState, Member, Forbidden, HTTPException, Colour
+from discord import VoiceState, Member
 from configparser import ConfigParser
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 
-from channelchat.commands import createchannel
-from channelchat.events import dispatch
+from channelchat.commands import createchannel, deletechannel
+from channelchat.events import dispatch, handlers
 from channelchat.events.eventType import EventType
 
 config = ConfigParser()
@@ -28,6 +27,16 @@ async def on_voice_state_update(member: Member, before: VoiceState, after: Voice
 @has_permissions(manage_channels=True, manage_roles=True)
 async def create_channel(ctx, arg=None):
     await createchannel.create_channel(ctx, arg)
+
+@bot.command()
+@has_permissions(manage_channels=True, manage_roles=True)
+async def delete_channel(ctx, arg=None):
+    await deletechannel.delete_channel(ctx, arg)
+
+@bot.command
+@has_permissions(manage_channels=True, manage_roles=True)
+async def undo(ctx, arg=None):
+    await undo.undo(ctx, arg)
 
 
 async def log(message: str):

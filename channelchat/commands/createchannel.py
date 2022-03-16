@@ -1,7 +1,5 @@
 import discord
 from discord import Colour
-from discord.ext.commands import has_permissions
-from channelchat.main import bot
 
 async def create_channel(ctx, arg=None):
     if not arg:

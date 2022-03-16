@@ -1,1 +1,3 @@
-from channelchat.events.handlers import channelrole
+from channelchat.events import handlers
+
+handlers.init()

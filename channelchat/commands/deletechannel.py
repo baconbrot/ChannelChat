@@ -1,11 +1,6 @@
-from discord.ext.commands import has_permissions
-
-from channelchat.main import bot
 from channelchat.commands.createchannel import create_channel
 
 
-@bot.command
-@has_permissions(manage_channels=True, manage_roles=True)
 async def delete_channel(ctx, arg=None):
     if not arg:
         return
@@ -18,7 +13,3 @@ async def delete_channel(ctx, arg=None):
     await category.delete()
     role = next(role for role in guild.roles if role.name == 'Channel: ' + arg)
     await role.delete()
-
-
-def _inverse():
-    return create_channel
