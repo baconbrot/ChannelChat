@@ -1,6 +1,9 @@
 import discord
 from discord import Colour
+from discord.ext.commands import has_permissions
 
+
+@has_permissions(manage_channels=True, manage_roles=True)
 async def create_channel(ctx, arg=None):
     if not arg:
         return

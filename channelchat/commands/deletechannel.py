@@ -1,6 +1,7 @@
-from channelchat.commands.createchannel import create_channel
+from discord.ext.commands import has_permissions
 
 
+@has_permissions(manage_channels=True, manage_roles=True)
 async def delete_channel(ctx, arg=None):
     if not arg:
         return

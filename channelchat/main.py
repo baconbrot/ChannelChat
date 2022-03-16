@@ -24,17 +24,14 @@ async def on_voice_state_update(member: Member, before: VoiceState, after: Voice
 
 
 @bot.command()
-@has_permissions(manage_channels=True, manage_roles=True)
 async def create_channel(ctx, arg=None):
     await createchannel.create_channel(ctx, arg)
 
 @bot.command()
-@has_permissions(manage_channels=True, manage_roles=True)
 async def delete_channel(ctx, arg=None):
     await deletechannel.delete_channel(ctx, arg)
 
 @bot.command
-@has_permissions(manage_channels=True, manage_roles=True)
 async def undo(ctx, arg=None):
     await undo.undo(ctx, arg)
 
