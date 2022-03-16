@@ -4,10 +4,9 @@ from collections import deque
 from discord import VoiceState, Member
 from configparser import ConfigParser
 from discord.ext import commands
-from discord.ext.commands import has_permissions
 
 from channelchat.commands import createchannel, deletechannel
-from channelchat.events import dispatch, handlers
+from channelchat.events import dispatch
 from channelchat.events.eventType import EventType
 
 config = ConfigParser()
@@ -27,9 +26,11 @@ async def on_voice_state_update(member: Member, before: VoiceState, after: Voice
 async def create_channel(ctx, arg=None):
     await createchannel.create_channel(ctx, arg)
 
+
 @bot.command()
 async def delete_channel(ctx, arg=None):
     await deletechannel.delete_channel(ctx, arg)
+
 
 @bot.command
 async def undo(ctx, arg=None):
@@ -39,5 +40,6 @@ async def undo(ctx, arg=None):
 async def log(message: str):
     channel = bot.get_channel(log_channel)
     await channel.send(message)
+
 
 bot.run(token)
