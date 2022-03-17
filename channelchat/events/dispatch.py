@@ -1,7 +1,3 @@
-from importlib import import_module
-from pkgutil import walk_packages, iter_modules
-
-import channelchat
 from channelchat.events.eventType import EventType
 
 
@@ -13,8 +9,8 @@ async def trigger(event_type: EventType, *args):
         try:
             for task in _listeners.get(event_type.value):
                 await task(*args)
-        except:
-            print(f'[LOG] No task for event {event_type.name}')
+        except Exception as e:
+            print(f'[ERROR] {e}')
 
 
 def register(event_type: EventType):
