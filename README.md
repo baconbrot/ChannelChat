@@ -19,5 +19,4 @@ history_length = 32
 
 [log]
 channel = "LOG_CHANNEL_ID"
-
 ```
