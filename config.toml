@@ -12,4 +12,4 @@ prefix = '!'
 history_length = 32
 
 [log]
-channel = "CHANNEL_coID"
+channel = "LOG_CHANNEL_ID"
