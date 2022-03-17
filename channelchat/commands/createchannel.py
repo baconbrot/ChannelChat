@@ -2,6 +2,8 @@ import discord
 from discord import Colour
 from discord.ext.commands import has_permissions
 
+from channelchat.config.config import config
+
 
 @has_permissions(manage_channels=True, manage_roles=True)
 async def create_channel(ctx, arg=None):
@@ -13,7 +15,7 @@ async def create_channel(ctx, arg=None):
     voice_channel = None
     text_channel = None
     try:
-        role = await guild.create_role(name='Channel: ' + arg,
+        role = await guild.create_role(name=f'{config.get_channel_role_prefix()}{arg}',
                                        color=Colour.dark_gold(),
                                        mentionable=False,
                                        reason=f'Role for {arg}-chat')

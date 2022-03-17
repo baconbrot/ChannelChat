@@ -3,18 +3,17 @@ from collections import deque
 
 from discord import VoiceState, Member
 from configparser import ConfigParser
+import sys
 from discord.ext import commands
+import getopt
 
 from channelchat.commands import createchannel, deletechannel
 from channelchat.events import dispatch
 from channelchat.events.eventType import EventType
+from channelchat.config import config
 
-config = ConfigParser()
-config.read('../config.ini')
-token = config.get('main', 'token')
-log_channel = int(config.get('log', 'channel'))
-command_history = deque(maxlen=32)
-bot = commands.Bot(command_prefix='!')
+command_history = deque(maxlen=config.get_command_history_length())
+bot = commands.Bot(command_prefix=config.get_command_prefix())
 
 
 @bot.event
@@ -38,8 +37,8 @@ async def undo(ctx, arg=None):
 
 
 async def log(message: str):
-    channel = bot.get_channel(log_channel)
+    channel = bot.get_channel(config.get_log_channel())
     await channel.send(message)
 
+bot.run(config.get_token())
 
-bot.run(token)

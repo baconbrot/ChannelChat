@@ -1,6 +1,7 @@
 import discord
 from discord import Member, VoiceState, Forbidden, HTTPException
 
+from channelchat.config.config import config
 from channelchat.events.dispatch import register
 from channelchat.events.eventType import EventType
 
@@ -14,7 +15,7 @@ async def assign_role(member: Member, before: VoiceState, after: VoiceState):
         # await log(f'on_voice_state_update error: {member=}, {before=}, {after=}')
         return
     # Unsubscribe before text-channel
-    old_role = discord.utils.get(member.guild.roles, name=f'Channel: {before.channel.category.name}')
+    old_role = discord.utils.get(member.guild.roles, name=f'{config.get_channel_role_prefix()}{before.channel.category.name}')
     if old_role is not None:
         try:
             await member.remove_roles(old_role, atomic=True)
@@ -23,7 +24,7 @@ async def assign_role(member: Member, before: VoiceState, after: VoiceState):
         except HTTPException as e:
             print(e)
     # Subscribe to after text-channel
-    new_role = discord.utils.get(member.guild.roles, name=f'Channel: {after.channel.category.name}')
+    new_role = discord.utils.get(member.guild.roles, name=f'{config.get_channel_role_prefix()}{after.channel.category.name}')
     if new_role is not None:
         try:
             await member.add_roles(new_role, atomic=True)

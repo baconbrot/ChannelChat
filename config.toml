@@ -1,0 +1,14 @@
+[main]
+token = "YOUR_TOKEN"
+
+[channels]
+insert_position = 2
+role_prefix = 'Channel: '
+names = ["First", "Second"]
+
+[commands]
+prefix = '!'
+history_length = 32
+
+[log]
+channel = "CHANNEL_ID"
