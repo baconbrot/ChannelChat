@@ -23,7 +23,7 @@ def get_channel_names():
     return list(channel_names)
 
 
-def get_channel_insert_pos():
+def get_channel_insert_position():
     channel_insert_position = config.get('channel').get('insert_position')
     return channel_insert_position
 

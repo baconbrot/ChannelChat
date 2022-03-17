@@ -19,7 +19,7 @@ async def create_channel(ctx, arg=None):
                                        color=Colour.dark_gold(),
                                        mentionable=False,
                                        reason=f'Role for {arg}-chat')
-        category = await guild.create_category_channel(arg, position=1)
+        category = await guild.create_category_channel(arg, position=config.get_channel_insert_position())
         voice_channel = await category.create_voice_channel('Voice')
         overwrites = {
             guild.default_role: discord.PermissionOverwrite(read_messages=False),
