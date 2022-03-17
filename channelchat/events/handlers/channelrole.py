@@ -1,7 +1,7 @@
 import discord
 from discord import Member, VoiceState, Forbidden, HTTPException
 
-from channelchat.config.config import config
+from channelchat.config import config
 from channelchat.events.dispatch import register
 from channelchat.events.eventType import EventType
 

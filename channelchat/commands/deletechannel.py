@@ -1,6 +1,6 @@
 from discord.ext.commands import has_permissions
 
-from channelchat.config.config import config
+from channelchat.config import config
 
 
 @has_permissions(manage_channels=True, manage_roles=True)
