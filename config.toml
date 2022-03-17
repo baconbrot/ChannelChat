@@ -1,12 +1,12 @@
 [main]
 token = "YOUR_TOKEN"
 
-[channels]
+[channel]
 insert_position = 2
 role_prefix = 'Channel: '
 names = ["First", "Second"]
 
-[commands]
+[command]
 prefix = '!'
 history_length = 32
 
