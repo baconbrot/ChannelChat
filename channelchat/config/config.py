@@ -61,3 +61,9 @@ def get_channel_role_prefix():
     global config
     prefix = config.get('channel').get('role_prefix')
     return prefix
+
+
+def get_min_channels():
+    global config
+    count = config.get('channel').get('min_channels')
+    return count

@@ -7,7 +7,10 @@ from channelchat.config import config
 async def delete_channel(ctx, arg=None):
     if not arg:
         return
-    guild = ctx.guild
+    try:
+        guild = ctx.guild
+    except:
+        guild = ctx
     category = next(category for category in guild.categories if category.name == arg)
     for text_channel in category.text_channels:
         await text_channel.delete()

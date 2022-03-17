@@ -3,6 +3,7 @@ token = "YOUR_TOKEN"
 
 [channel]
 insert_position = 2
+min_channels = 1
 role_prefix = 'Channel: '
 names = ["First", "Second"]
 
@@ -11,4 +12,4 @@ prefix = '!'
 history_length = 32
 
 [log]
-channel = "CHANNEL_ID"
+channel = "CHANNEL_coID"

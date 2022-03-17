@@ -9,7 +9,10 @@ from channelchat.config import config
 async def create_channel(ctx, arg=None):
     if not arg:
         return
-    guild = ctx.guild
+    try:
+        guild = ctx.guild
+    except:
+        guild = ctx
     role = None
     category = None
     voice_channel = None

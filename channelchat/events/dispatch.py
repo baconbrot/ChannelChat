@@ -1,3 +1,4 @@
+from channelchat.events import handlers
 from channelchat.events.eventType import EventType
 
 
@@ -6,11 +7,8 @@ _listeners = {}
 
 async def trigger(event_type: EventType, *args):
     if event_type == EventType.VOICE_STATE_UPDATE:
-        try:
-            for task in _listeners.get(event_type.value):
-                await task(*args)
-        except Exception as e:
-            print(f'[ERROR] {e}')
+        for task in _listeners.get(event_type.value):
+             await task(*args)
 
 
 def register(event_type: EventType):
@@ -25,3 +23,4 @@ def register(event_type: EventType):
     return decorator
 
 
+handlers.init()
