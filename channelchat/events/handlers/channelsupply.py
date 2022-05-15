@@ -47,7 +47,7 @@ async def check_channel_supply(member: Member, before: VoiceState, after: VoiceS
     """
     current_channels = await get_existing_channels(member)
     number_of_empty_channels = empty_channel_count(before.channel, after.channel, current_channels)
-    await remove_empty_channel(number_of_empty_channels, before.channel)
-    await create_empty_channel_as_needed(number_of_empty_channels, after.channel, current_channels)
+    #await remove_empty_channel(number_of_empty_channels, before.channel)
+    #await create_empty_channel_as_needed(number_of_empty_channels, after.channel, current_channels)
 
 
