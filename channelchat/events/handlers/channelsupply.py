@@ -40,7 +40,7 @@ async def get_existing_channels(member):
     return [channel.voice_channels[0] for channel in channels if channel.name in channel_names]
 
 
-@register(EventType.VOICE_STATE_UPDATE)
+#@register(EventType.VOICE_STATE_UPDATE)
 async def check_channel_supply(member: Member, before: VoiceState, after: VoiceState):
     """
     Dynamically creates and removes Channels as needed (keeps at least one free)
