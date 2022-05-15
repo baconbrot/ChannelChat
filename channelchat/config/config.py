@@ -9,7 +9,9 @@ try:
         if opt == '-c':
             config_path = arg
 except:
-    config_path = '../config.toml'
+    config_path = 'config.toml'
+else:
+    config_path = 'config.toml'
 config = toml.load(config_path)
 
 
