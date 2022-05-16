@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+import logging
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
+
 from collections import deque
 
 from discord import VoiceState, Member
@@ -11,6 +14,7 @@ from channelchat.commands import createchannel, deletechannel
 from channelchat.events import dispatch
 from channelchat.events.eventType import EventType
 from channelchat.config import config
+
 
 command_history = deque(maxlen=config.get_command_history_length())
 bot = commands.Bot(command_prefix=config.get_command_prefix())

@@ -1,17 +1,21 @@
 import getopt
+import logging
 import sys
 import toml
 
 
 try:
+
     opts, args = getopt.getopt(sys.argv[1:], 'c:')
     for opt, arg in opts:
         if opt == '-c':
             config_path = arg
+
 except:
     config_path = 'config.toml'
 else:
     config_path = 'config.toml'
+logging.info(f"Config path: {config_path}")
 config = toml.load(config_path)
 
 
