@@ -3,17 +3,18 @@ import logging
 import sys
 import toml
 
-
+config_path = None
 try:
-
     opts, args = getopt.getopt(sys.argv[1:], 'c:')
+    logging.debug(f"Found opts")
     for opt, arg in opts:
+        logging.debug(f"Found opt {opt}:{arg}")
         if opt == '-c':
             config_path = arg
-
-except:
+except Exception as e:
+    logging.error(f"Config path error: {e}")
     config_path = 'config.toml'
-else:
+if not config_path:
     config_path = 'config.toml'
 logging.info(f"Config path: {config_path}")
 config = toml.load(config_path)
